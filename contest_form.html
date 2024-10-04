@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="home.css">
+    <title>Contest Form</title>
+</head>
+
+<body>
+    <section class="home ">
+        <div class="  w-96 flex justify-start">
+            <p class="  text-white font-semibold italic mt-10">Fill the form to contest</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg my-8 w-96 mx-4">
+            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Name">
+            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Age">
+            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Gender">
+            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Mother's Name">
+            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5"
+                placeholder="Mother's Phone/Whatsapp Number">
+            <!-- <input type="file" class=" border border-gray-500 p-2 rounded w-full mb-2" placeholder="Baby's Name">
+            <input type="file" class=" border border-gray-500 p-2 rounded w-full mb-2" placeholder="Baby's Name"> -->
+            <!-- First Upload Button -->
+            <div class="flex items-center   w-96">
+                <div class="flex items-center justify-center w-10 h-9 border border-gray-500 rounded mr-5">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.64645 3.49645L4.40626 5.73664L3.70096 5.00615L8 0.707107L12.299 5.00615L11.5937 5.73664L9.35355 3.49645L8.5 2.64289V3.85V11.5H7.5V3.85V2.64289L6.64645 3.49645ZM14.5 14V11.5H15.5V14C15.5 14.4163 15.3576 14.7603 15.0589 15.0589C14.7603 15.3576 14.4163 15.5 14 15.5H2C1.58366 15.5 1.2397 15.3576 0.941053 15.0589C0.642407 14.7603 0.5 14.4163 0.5 14V11.5H1.5V14V14.5H2H14H14.5V14Z" fill="#1D1B20" stroke="#019FCB"/>
+                        </svg>
+                        
+                </div>
+                <div class=" border border-gray-500 rounded p-2 w-9/12">
+                    <!-- <input type="file" id="picture" name="picture" class="w-full" /> -->
+                    <label for="picture" class=" text-gray-500">Upload Baby’s Picture</label>
+                </div>
+            </div>
+            <div class="flex items-center  mt-5 w-96">
+                <div class="flex items-center justify-center w-10 h-9 border border-gray-500 rounded mr-5">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.64645 3.49645L4.40626 5.73664L3.70096 5.00615L8 0.707107L12.299 5.00615L11.5937 5.73664L9.35355 3.49645L8.5 2.64289V3.85V11.5H7.5V3.85V2.64289L6.64645 3.49645ZM14.5 14V11.5H15.5V14C15.5 14.4163 15.3576 14.7603 15.0589 15.0589C14.7603 15.3576 14.4163 15.5 14 15.5H2C1.58366 15.5 1.2397 15.3576 0.941053 15.0589C0.642407 14.7603 0.5 14.4163 0.5 14V11.5H1.5V14V14.5H2H14H14.5V14Z" fill="#1D1B20" stroke="#019FCB"/>
+                        </svg>
+                        
+                </div>
+                <div class=" border border-gray-500 rounded p-2 w-9/12">
+                    <!-- <input type="file" id="video" name="video" class="w-full" /> -->
+                    <label for="video" class=" text-gray-500">Upload Baby’s Immunization Card</label>
+                </div>
+            </div>
+
+            <script>
+                const fileInputs = document.querySelectorAll('input[type="file"]');
+                fileInputs.forEach((input) => {
+                    input.addEventListener('change', () => {
+                        const fileLabel = input.nextElementSibling;
+                        const fileName = input.value.split('\\').pop();
+                        fileLabel.textContent = fileName || 'No file chosen';
+                    });
+                });
+
+                const pictureInput = document.getElementById('picture');
+                const videoInput = document.getElementById('video');
+
+                pictureInput.addEventListener('change', uploadFile);
+                videoInput.addEventListener('change', uploadFile);
+
+                function uploadFile(event) {
+                    const file = event.target.files[0];
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => console.log(data))
+                        .catch(error => console.error(error));
+                }
+            </script>
+            <div class="">
+                <button class=" submit text-white py-2 rounded w-full mt-10"><a href="./enroll_success.html">SUBMIT</a></button>
+            </div>
+        </div>
+        <div class="mt-10">
+            <a href="" class="action-btn text-[#0C3C7C] font-bold  px-11 py-5 rounded-md block">END POLIO NOW</a>
+            <p class="text-white italic font-semibold text-xs mt-3 ml-5 mb-3">Terms & Conditions applied</p>
+        </div>
+    </section>
+</body>
+
+</html>
