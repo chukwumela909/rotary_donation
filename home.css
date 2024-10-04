@@ -6,7 +6,7 @@
 }
 
 .home {
-    height: 100%;
+    height: 100vh;
     background-image: linear-gradient(rgba(12, 61, 124, 0.900), rgba(12, 61, 124, 0.900)), url('./assets/home_bg.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
