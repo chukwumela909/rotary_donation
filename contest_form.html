@@ -16,16 +16,17 @@
 </head>
 
 <body>
+    <div class="loader" id="loginLoader"></div>
     <section class="home ">
         <div class="  w-96 flex justify-start">
             <p class="  text-white font-semibold italic mt-10">Fill the form to contest</p>
         </div>
         <div class="bg-white p-4 rounded-lg my-8 w-96 mx-4">
-            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Name">
-            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Age">
-            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Gender">
-            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Mother's Name">
-            <input type="text" class=" border border-gray-500 p-2 rounded w-full mb-5"
+            <input type="text" id="baby_name" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Name">
+            <input type="text" id="baby_age" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Age">
+            <input type="text" id="baby_gender" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Baby's Gender">
+            <input type="text" id="mother_name" class=" border border-gray-500 p-2 rounded w-full mb-5" placeholder="Mother's Name">
+            <input type="text" id="mother_phone" class=" border border-gray-500 p-2 rounded w-full mb-5"
                 placeholder="Mother's Phone/Whatsapp Number">
             <!-- <input type="file" class=" border border-gray-500 p-2 rounded w-full mb-2" placeholder="Baby's Name">
             <input type="file" class=" border border-gray-500 p-2 rounded w-full mb-2" placeholder="Baby's Name"> -->
@@ -38,7 +39,7 @@
                         
                 </div>
                 <div class=" border border-gray-500 rounded p-2 w-9/12">
-                    <!-- <input type="file" id="picture" name="picture" class="w-full" /> -->
+                    <input id="baby_picture" type="file" id="picture" name="picture" class="w-full" />
                     <label for="picture" class=" text-gray-500">Upload Baby’s Picture</label>
                 </div>
             </div>
@@ -50,43 +51,13 @@
                         
                 </div>
                 <div class=" border border-gray-500 rounded p-2 w-9/12">
-                    <!-- <input type="file" id="video" name="video" class="w-full" /> -->
-                    <label for="video" class=" text-gray-500">Upload Baby’s Immunization Card</label>
+                    <input id="baby_card" type="file" id="video" name="video" class="w-full" />
+                    <label for="picture" class=" text-gray-500">Upload Baby’s Immunization Card</label>
                 </div>
             </div>
 
-            <script>
-                const fileInputs = document.querySelectorAll('input[type="file"]');
-                fileInputs.forEach((input) => {
-                    input.addEventListener('change', () => {
-                        const fileLabel = input.nextElementSibling;
-                        const fileName = input.value.split('\\').pop();
-                        fileLabel.textContent = fileName || 'No file chosen';
-                    });
-                });
-
-                const pictureInput = document.getElementById('picture');
-                const videoInput = document.getElementById('video');
-
-                pictureInput.addEventListener('change', uploadFile);
-                videoInput.addEventListener('change', uploadFile);
-
-                function uploadFile(event) {
-                    const file = event.target.files[0];
-                    const formData = new FormData();
-                    formData.append('file', file);
-
-                    fetch('/upload', {
-                        method: 'POST',
-                        body: formData
-                    })
-                        .then(response => response.json())
-                        .then(data => console.log(data))
-                        .catch(error => console.error(error));
-                }
-            </script>
             <div class="">
-                <button class=" submit text-white py-2 rounded w-full mt-10"><a href="./enroll_success.html">SUBMIT</a></button>
+                <button onclick="register()" class=" submit text-white py-2 rounded w-full mt-10"><a href="./enroll_success.html">SUBMIT</a></button>
             </div>
         </div>
         <div class="mt-10">
@@ -94,6 +65,8 @@
             <p class="text-white italic font-semibold text-xs mt-3 ml-5 mb-3">Terms & Conditions applied</p>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
